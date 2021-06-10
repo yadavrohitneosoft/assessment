@@ -8,3 +8,4 @@
 5. $ php artisan serve
 6. $ php artisan migrate
 7. $ php artisan db:seed --class=UsersTableSeeder  (it is for creating random admin users)
+8. website url: http://127.0.0.1:8000/property/property-home
