@@ -10,4 +10,5 @@ if I got the time frame then i will do that one as well.
 5. $ php artisan serve
 6. $ php artisan migrate
 7. $ php artisan db:seed --class=UsersTableSeeder  (it is for creating random admin users)
+    Note: default password for admin is: password
 8. website url: http://127.0.0.1:8000/property/property-home
