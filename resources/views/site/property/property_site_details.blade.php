@@ -172,6 +172,20 @@
                                 </table>
                                 </div>
                             @if(!empty($get_SessionData))
+                                <div class="table-responsive">
+                                    <table class="table table-sm table-borderless mb-0">
+                                        <tbody>
+                                            <tr>
+                                                <th class="pl-0 w-25" scope="row"><strong>Property Owner</strong></th>
+                                                <td>{{$data_prop[0]->name}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="pl-0 w-25" scope="row"><strong>Email</strong></th>
+                                                <td>{{$data_prop[0]->email}}</td>
+                                            </tr> 
+                                        </tbody>
+                                    </table>
+                                </div>
                                 <hr><button type="button" class="btn btn-light btn-md mr-1 mb-2" data-toggle="modal" data-target="#ProAddModel"><i class="fas fa-phone pr-2"></i>Connect</button>
                             @endif
                             </div>

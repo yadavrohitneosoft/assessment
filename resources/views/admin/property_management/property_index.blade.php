@@ -292,7 +292,8 @@ function property_detail(thisattr, id = '') {
                 var paddress = $("#paddress").val();
                 var pnearby = $("#pnearby").val(); 
                 let totalImages = $('#files')[0].files.length; 
-                let propImages = $('#files')[0];  
+                let propImages = $('#files')[0];
+                let user_id = '{{$get_SessionData["id"]}}';  
                  
                 if(ptitle == '') {
                     $('#err_ptitle').html('Title is required.');
@@ -329,6 +330,7 @@ function property_detail(thisattr, id = '') {
                     for(let i = 0; i < totalImages; i++) {
                         formData.append('files[]', propImages.files[i]);
                     }
+                    formData.append('user_id', user_id);
                     formData.append('totalImages', totalImages);
                     formData.append('ptitle', ptitle);
                     formData.append('desc', desc);

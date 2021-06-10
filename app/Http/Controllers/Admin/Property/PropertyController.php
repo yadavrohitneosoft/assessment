@@ -51,6 +51,7 @@ class PropertyController extends Controller
 
     //add Property
     public function add_property(Request $request){  
+        $uid = $request->input('user_id');
         $title = $request->input('ptitle');
         $desc = $request->input('desc');
         $price = $request->input('pprice'); 
@@ -63,6 +64,7 @@ class PropertyController extends Controller
         $total = $request->input('totalImages');
 
         $isValid = $this->checkValidator($request->all(), [
+            'user_id' => 'required',
             'ptitle' => 'required',
             'desc' => 'required',
             'pprice' => 'required',
@@ -76,15 +78,16 @@ class PropertyController extends Controller
         if($isValid->fails()) { 
             return $this->errorResponse($isValid->messages()->first(), 202);
         }else{    
+            $this->propertyModel->user_id    =  $uid;
             $this->propertyModel->title      =  $title;
             $this->propertyModel->price      =  $price;
-            $this->propertyModel->description      =  $desc;
-            $this->propertyModel->floor_area      =  $floor_area;
-            $this->propertyModel->bedroom      =  $bedroom;
-            $this->propertyModel->bathroom      =  $bathroom;
-            $this->propertyModel->city      =  $city;
-            $this->propertyModel->address      =  $title;
-            $this->propertyModel->nearby      =  $nearby;
+            $this->propertyModel->description=  $desc;
+            $this->propertyModel->floor_area =  $floor_area;
+            $this->propertyModel->bedroom    =  $bedroom;
+            $this->propertyModel->bathroom   =  $bathroom;
+            $this->propertyModel->city       =  $city;
+            $this->propertyModel->address    =  $title;
+            $this->propertyModel->nearby     =  $nearby;
             $this->propertyModel->created_at =  $this->now;
              
             if($this->propertyModel->save()){
@@ -129,16 +132,13 @@ class PropertyController extends Controller
         }
     }
 
-    
+    //admin property details admin
     public function property_detail(Request $request){ 
         auth_check();
         $baseUrl = URL::to('/');
         $pid = $request->input('id');
        // DB::raw("CONCAT($baseUrl,'/uploads/property_images/',CONCAT($pid,'/','image')) as images")
-        $query = PropertyImages::select('id','prop_id','image', 'isFeatured', DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d') as cr_date") )
-            ->where([ ['prop_id',$pid] ])
-            ->orderBy('id','DESC')
-            ->get(); 
+        $query = PropertyImages::select('id','prop_id','image', 'isFeatured', DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d') as cr_date") )->where([ ['prop_id',$pid] ])->orderBy('id','DESC')->get(); 
         $this->data['prop_images'] = $query;
         return view('admin/property_management/property_details', $this->data);
     }
@@ -149,18 +149,22 @@ class PropertyController extends Controller
         $query = Property::select("property.*", "property_images.prop_id","property_images.image as dImage")
         ->leftJoin("property_images",function($join){
             $join->on("property_images.prop_id","=","property.id")->where('property_images.isFeatured', '=', '1');
-        })
+        })->orderBy('property.id','DESC')
         ->get(); 
         $this->data['data'] = $query;
         return view('site.property.property_site_index', $this->data);
     }
-    //Property Site 
-    public function site_property_details($id){
+    //Property Site details
+    public function site_property_details($propid){
         site_auth_check(); 
-        $findProp = Property::where([ ['id',$id] ])
-            ->orderBy('id','DESC')
-            ->get();  
-        $findImages = PropertyImages::where([ ['prop_id',$id] ])
+        // $findProp = Property::where([ ['id',$id] ])
+        //     ->orderBy('id','DESC')
+        //     ->get(); 
+        $findProp = Property::select('property.*','users.name','users.email')->leftJoin("users", function($join){
+                $join->on("users.id","=","property.user_id");
+            })->where([ ['property.id',$propid] ])->get(); 
+        //find prop images
+        $findImages = PropertyImages::where([ ['prop_id',$propid] ])
             ->orderBy('id','DESC')
             ->get();
         $this->data['data_prop'] = $findProp;
