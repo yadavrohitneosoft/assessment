@@ -10731,6 +10731,7 @@
       .hg200{
         height: 150px;
       }
+      .btgray{    border-top: 1px solid #ddd !important;}
       .error-template {padding: 40px 15px;text-align: center;}
       .prices{
         padding: 10px; 

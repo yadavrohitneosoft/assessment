@@ -126,30 +126,30 @@
                                 <table class="table table-sm table-borderless mb-0">
                                     <tbody style="width: 40%; float:left">
                                     <tr>
-                                        <th class="pl-0 w-25" scope="row"><strong>Bedroom</strong></th>
-                                        <td>{{$data_prop[0]->bedroom}}</td>
+                                        <th class="pl-0 w-25 btgray" scope="row"><strong>Bedroom</strong></th>
+                                        <td class="btgray">{{$data_prop[0]->bedroom}}</td>
                                     </tr>
                                     <tr>
-                                        <th class="pl-0 w-25" scope="row"><strong>Bathroom</strong></th>
-                                        <td>{{$data_prop[0]->bathroom}}</td>
+                                        <th class="pl-0 w-25 btgray" scope="row"><strong>Bathroom</strong></th>
+                                        <td class="btgray">{{$data_prop[0]->bathroom}}</td>
                                     </tr>
                                     <tr>
-                                        <th class="pl-0 w-25" scope="row"><strong>Area Sq.ft.</strong></th>
-                                        <td>{{$data_prop[0]->floor_area}}</td>
+                                        <th class="pl-0 w-25 btgray" scope="row"><strong>Area Sq.ft.</strong></th>
+                                        <td class="btgray">{{$data_prop[0]->floor_area}}</td>
                                     </tr>
                                     </tbody>
                                     <tbody style="width: 60%; float:right">
                                         <tr>
-                                            <th class="pl-0 w-25" scope="row"><strong>City</strong></th>
-                                            <td>{{$data_prop[0]->city}}</td>
+                                            <th class="pl-0 w-25 btgray" scope="row"><strong>City</strong></th>
+                                            <td class="btgray">{{$data_prop[0]->city}}</td>
                                         </tr>
                                         <tr>
-                                            <th class="pl-0 w-25" scope="row"><strong>Address</strong></th>
-                                            <td>{{$data_prop[0]->address}}</td>
+                                            <th class="pl-0 w-25 btgray" scope="row"><strong>Address</strong></th>
+                                            <td class="btgray">{{$data_prop[0]->address}}</td>
                                         </tr>
                                         <tr>
-                                            <th class="pl-0 w-25" scope="row"><strong>Near By</strong></th>
-                                            <td>{{$data_prop[0]->nearby}}</td>
+                                            <th class="pl-0 w-25 btgray" scope="row"><strong>Near By</strong></th>
+                                            <td class="btgray">{{$data_prop[0]->nearby}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
