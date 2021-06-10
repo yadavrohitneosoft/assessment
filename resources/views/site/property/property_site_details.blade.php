@@ -172,7 +172,7 @@
                                 </table>
                                 </div>
                             @if(!empty($get_SessionData))
-                                <hr><button type="button" class="btn btn-light btn-md mr-1 mb-2" data-toggle="modal" data-target="#ProAddModel"><i class="fas fa-shopping-cart pr-2"></i>Connect</button>
+                                <hr><button type="button" class="btn btn-light btn-md mr-1 mb-2" data-toggle="modal" data-target="#ProAddModel"><i class="fas fa-phone pr-2"></i>Connect</button>
                             @endif
                             </div>
                             </div>
