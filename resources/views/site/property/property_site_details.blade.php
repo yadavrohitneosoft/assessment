@@ -156,6 +156,18 @@
                                         <th class="pl-0 w-25" scope="row"><strong>Area Sq.ft.</strong></th>
                                         <td>{{$data_prop[0]->floor_area}}</td>
                                     </tr>
+                                    <tr>
+                                        <th class="pl-0 w-25" scope="row"><strong>City</strong></th>
+                                        <td>{{$data_prop[0]->city}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="pl-0 w-25" scope="row"><strong>Address</strong></th>
+                                        <td>{{$data_prop[0]->address}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="pl-0 w-25" scope="row"><strong>Near By</strong></th>
+                                        <td>{{$data_prop[0]->nearby}}</td>
+                                    </tr>
                                     </tbody>
                                 </table>
                                 </div>
