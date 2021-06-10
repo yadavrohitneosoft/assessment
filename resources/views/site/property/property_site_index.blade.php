@@ -79,7 +79,7 @@
                 <!-- @include('includes.sidebar') -->
             <!-- sidebar ends -->
             <div class="hidden loader" id="loader"><img src="{{ URL::asset('/') }}images/loader/loader.gif" /></div>
-            <div id="layoutSidenav_content" class="main_site_data">
+            <div id="layoutSidenav_content" style="padding-left:0px" class="main_site_data">
                 <!-- @yield('content')  --> 
                 <main>
                     <div class="container-fluid"> 
@@ -101,7 +101,22 @@
                         </div>
                         @endforeach
                     @else
-                        <p>No Data Found</p>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="error-template">
+                                    <h1>
+                                        Oops!</h1>
+                                    <h2>
+                                        No Data Found</h2>
+                                    <div class="error-details">
+                                        We'll add the data soon!
+                                    </div>
+                                     
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     @endif
                     </div>
                 </main> 

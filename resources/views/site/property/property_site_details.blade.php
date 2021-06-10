@@ -79,60 +79,41 @@
                 <!-- @include('includes.sidebar') -->
             <!-- sidebar ends -->
             <div class="hidden loader" id="loader"><img src="{{ URL::asset('/') }}images/loader/loader.gif" /></div>
-            <div id="layoutSidenav_content" class="main_site_data">
+            <div id="layoutSidenav_content" style="padding-left:0px" class="main_site_data">
                 <!-- @yield('content')  --> 
+            @if(!empty($data_prop[0]))
                 <main>
                     <div class="container-fluid"> 
                         <ol class="breadcrumb mb-4 mt-4 onscrollFixed">
                             <li class="breadcrumb-item"><a href="{{ url('/property/property-home') }}">Home</a></li>
                             <li class="breadcrumb-item active"><a href="{{ url('/property/property-home') }}">Property</a></li> 
-                            <li class="breadcrumb-item active">Property Detail</li> 
+                            <li class="breadcrumb-item active">Property Detail - {{!empty($data_prop[0]) ? $data_prop[0]->title : ''}}</li> 
                         </ol> 
                         
                         <?php //echo "<pre>"; print_r($data_prop); exit;?>
                         <!--Section: Block Content-->
-                        @if(!empty($data_prop[0]))
+                        
                             <section class="mb-5">
 
                             <div class="row">
                             <div class="col-md-6 mb-4 mb-md-0">
 
-                                <div id="mdb-lightbox-ui"></div>
-
-                                <div class="mdb-lightbox">
-
-                                <div class="row product-gallery mx-1">
-
-                                    <div class="col-6 mb-0">
-                                    <figure class="view overlay rounded z-depth-1 main-img">
-                                        @foreach($data_images as $val)
-                                            @if($val->isFeatured==1)
-                                                <a href="{{url('/uploads/property_images')}}{{'/'.$val->prop_id.'/'.$val->image}}" data-size="710x823">
-                                                    <img src="{{url('/uploads/property_images')}}{{'/'.$val->prop_id.'/'.$val->image}}" class="img-fluid z-depth-1">
-                                                </a>
-                                            @endif
-                                        @endforeach
-                                    </figure> 
+                                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                                    <div class="carousel-inner">
+                                    @foreach($data_images as $key=>$val)
+                                        <div class="carousel-item @if($key==0) active @endif">
+                                            <img class="d-block w-100" src="{{url('/uploads/property_images')}}{{'/'.$val->prop_id.'/'.$val->image}}" alt="Real Estate">
+                                        </div>
+                                    @endforeach
                                     </div>
-                                    <div class="col-12">
-                                    <div class="row">
-
-                                        @foreach($data_images as $val)
-                                            @if($val->isFeatured==0) 
-                                                <div class="col-3">
-                                                    <div class="view overlay rounded z-depth-1 gallery-item">
-                                                        <img src="{{url('/uploads/property_images')}}{{'/'.$val->prop_id.'/'.$val->image}}"
-                                                        class="img-fluid">
-                                                        <div class="mask rgba-white-slight"></div>
-                                                    </div>
-                                                </div>
-                                            @endif
-                                        @endforeach
-                                        
-                                    </div>
-                                    </div>
-                                </div>
-
+                                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
                                 </div>
 
                             </div>
@@ -143,7 +124,7 @@
                                 <p class="pt-1">{{$data_prop[0]->description}}  </p>
                                 <div class="table-responsive">
                                 <table class="table table-sm table-borderless mb-0">
-                                    <tbody>
+                                    <tbody style="width: 40%; float:left">
                                     <tr>
                                         <th class="pl-0 w-25" scope="row"><strong>Bedroom</strong></th>
                                         <td>{{$data_prop[0]->bedroom}}</td>
@@ -156,18 +137,20 @@
                                         <th class="pl-0 w-25" scope="row"><strong>Area Sq.ft.</strong></th>
                                         <td>{{$data_prop[0]->floor_area}}</td>
                                     </tr>
-                                    <tr>
-                                        <th class="pl-0 w-25" scope="row"><strong>City</strong></th>
-                                        <td>{{$data_prop[0]->city}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th class="pl-0 w-25" scope="row"><strong>Address</strong></th>
-                                        <td>{{$data_prop[0]->address}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th class="pl-0 w-25" scope="row"><strong>Near By</strong></th>
-                                        <td>{{$data_prop[0]->nearby}}</td>
-                                    </tr>
+                                    </tbody>
+                                    <tbody style="width: 60%; float:right">
+                                        <tr>
+                                            <th class="pl-0 w-25" scope="row"><strong>City</strong></th>
+                                            <td>{{$data_prop[0]->city}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="pl-0 w-25" scope="row"><strong>Address</strong></th>
+                                            <td>{{$data_prop[0]->address}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="pl-0 w-25" scope="row"><strong>Near By</strong></th>
+                                            <td>{{$data_prop[0]->nearby}}</td>
+                                        </tr>
                                     </tbody>
                                 </table>
                                 </div>
@@ -194,11 +177,10 @@
 
                             </section>
                             <!--Section: Block Content-->
-                        @else
-                            <p>No data found</p>
-                        @endif
+                        
                     </div>
                 </main> 
+           
   
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid">
@@ -217,7 +199,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Send Query - {{$data_prop[0]->title}}</h4>
+                        <h4 class="modal-title">Send Query - {{!empty($data_prop[0]) ? $data_prop[0]->title : ''}}</h4>
                     </div>
                     <!-- Modal body start-->
                     
@@ -267,6 +249,24 @@
             </div>
         </div>
     <!--  model end --> 
+    @else
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="error-template">
+                    <h1>
+                        Oops!</h1>
+                    <h2>
+                        No Data Found</h2>
+                    <div class="error-details">
+                        We'll add the data soon!
+                    </div>
+                        
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="{{ URL::asset('/') }}js/admin/scripts.js"></script>  
@@ -330,7 +330,8 @@
             });
         } 
             
-            $(document).ready(function () {    
+            $(document).ready(function () { 
+                $('.carousel').carousel();   
                 //allow only numeric
                 $('.numberonly').keypress(function (e) {    
                 var charCode = (e.which) ? e.which : event.keyCode    
