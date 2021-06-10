@@ -171,6 +171,7 @@
                                     </tbody>
                                 </table>
                                 </div>
+                                <hr>
                             @if(!empty($get_SessionData))
                                 <div class="table-responsive">
                                     <table class="table table-sm table-borderless mb-0">
